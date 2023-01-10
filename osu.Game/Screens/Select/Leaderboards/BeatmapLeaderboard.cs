@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
+using osu.Framework.Logging;
 using osu.Game.Beatmaps;
 using osu.Game.Database;
 using osu.Game.Extensions;
@@ -221,6 +222,13 @@ namespace osu.Game.Screens.Select.Leaderboards
                 }
 
                 scores = scoreManager.OrderByTotalScore(scores.Detach());
+                foreach (ScoreInfo score in scores)
+                {
+                    var bmpInfo = score.BeatmapInfo;
+                    string logName = "scores";
+                    Logger.Log($"Bitmap Name:{bmpInfo.Metadata.Title} Diff name: {bmpInfo.DifficultyName} ID: {bmpInfo.ID} Hash: {bmpInfo.Hash} MD5Hash: {bmpInfo.MD5Hash}", logName);
+                    Logger.Log($"Score ID: {score.ID} Accurasy: {score.Accuracy} Date: {score.Date}", logName);
+                }
 
                 SetScores(scores);
             }

@@ -22,6 +22,8 @@ using osu.Game.Online.Placeholders;
 using osuTK;
 using osuTK.Graphics;
 using osu.Game.Localisation;
+using osu.Framework.Logging;
+using osu.Game.Scoring;
 
 namespace osu.Game.Online.Leaderboards
 {

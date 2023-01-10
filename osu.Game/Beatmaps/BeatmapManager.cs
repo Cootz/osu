@@ -14,6 +14,7 @@ using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
 using osu.Framework.Extensions;
 using osu.Framework.IO.Stores;
+using osu.Framework.Logging;
 using osu.Framework.Platform;
 using osu.Framework.Testing;
 using osu.Game.Beatmaps.Formats;
@@ -313,8 +314,13 @@ namespace osu.Game.Beatmaps
 
                 string oldMd5Hash = beatmapInfo.MD5Hash;
 
+                Logger.Log($"Saving beatmap {beatmapInfo.Metadata.Author} - {beatmapInfo.Metadata.Title}[{beatmapInfo.DifficultyName}]", "beatmapsave");
+                Logger.Log($"Old MD5Hash: {beatmapInfo.MD5Hash} Hash: {beatmapInfo.Hash}", "beatmapsave");
+
                 beatmapInfo.MD5Hash = stream.ComputeMD5Hash();
                 beatmapInfo.Hash = stream.ComputeSHA2Hash();
+
+                Logger.Log($"New MD5Hash: {beatmapInfo.MD5Hash} Hash: {beatmapInfo.Hash}", "beatmapsave");
 
                 beatmapInfo.LastLocalUpdate = DateTimeOffset.Now;
                 beatmapInfo.Status = BeatmapOnlineStatus.LocallyModified;

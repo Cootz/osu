@@ -14,6 +14,7 @@ using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
 using osu.Framework.Extensions;
 using osu.Framework.IO.Stores;
+using osu.Framework.Logging;
 using osu.Framework.Platform;
 using osu.Framework.Testing;
 using osu.Game.Beatmaps.Formats;
@@ -434,9 +435,12 @@ namespace osu.Game.Beatmaps
                     DeleteFile(setInfo, existingFileInfo);
 
                 string oldMd5Hash = beatmapInfo.MD5Hash;
+                string oldHash = beatmapInfo.Hash;
 
                 beatmapInfo.MD5Hash = stream.ComputeMD5Hash();
                 beatmapInfo.Hash = stream.ComputeSHA2Hash();
+
+                Logger.Log($"Beatmap {beatmapInfo.Metadata.Artist} - {beatmapInfo.DifficultyName} Old Hash: {oldHash} New Hash: {beatmapInfo.Hash}", "score-beatmap");
 
                 beatmapInfo.LastLocalUpdate = DateTimeOffset.Now;
                 beatmapInfo.Status = BeatmapOnlineStatus.LocallyModified;

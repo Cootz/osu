@@ -251,6 +251,8 @@ namespace osu.Game.Screens.Play
             Score.ScoreInfo.Ruleset = ruleset.RulesetInfo;
             Score.ScoreInfo.Mods = gameplayMods;
 
+            Logger.Log($"Score ID: {Score.ScoreInfo.ID} Date: {Score.ScoreInfo.Date} BeatmapInfo.Hash {Score.ScoreInfo.BeatmapInfo.Hash}", "score-beatmap");
+
             dependencies.CacheAs(GameplayState = new GameplayState(playableBeatmap, ruleset, gameplayMods, Score, ScoreProcessor));
 
             var rulesetSkinProvider = new RulesetSkinProvidingContainer(ruleset, playableBeatmap, Beatmap.Value.Skin);

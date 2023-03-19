@@ -21,6 +21,7 @@ using osu.Game.IO;
 using osu.Game.IO.Archives;
 using osu.Game.Overlays.Notifications;
 using osu.Game.Rulesets;
+using osu.Game.Scoring;
 using Realms;
 
 namespace osu.Game.Beatmaps
@@ -92,7 +93,9 @@ namespace osu.Game.Beatmaps
                         {
                             Logger.Log($"Transferring {beatmap.Scores.Count()} scores for unchanged difficulty \"{beatmap}\"", LoggingTarget.Database);
 
-                            foreach (var score in beatmap.Scores)
+                            var scores = realm.All<ScoreInfo>().Filter($"{nameof(ScoreInfo.BeatmapHash)} == $0", updatedBeatmap.Hash);
+
+                            foreach (var score in scores)
                                 score.BeatmapInfo = updatedBeatmap;
                         }
 

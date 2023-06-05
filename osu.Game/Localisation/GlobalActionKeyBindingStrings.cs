@@ -230,6 +230,11 @@ namespace osu.Game.Localisation
         public static LocalisableString DeselectAllMods => new TranslatableString(getKey(@"deselect_all_mods"), @"Deselect all mods");
 
         /// <summary>
+        /// "Switch search bar focus"
+        /// </summary>
+        public static LocalisableString SwitchSearchBarFocus => new TranslatableString(getKey(@"switch_search_bar_focus"), @"Switch search bar focus");
+
+        /// <summary>
         /// "Random"
         /// </summary>
         public static LocalisableString SelectNextRandom => new TranslatableString(getKey(@"select_next_random"), @"Random");

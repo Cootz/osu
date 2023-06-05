@@ -27,6 +27,7 @@ using osu.Game.Localisation;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Utils;
 using osuTK;
+using osuTK.Input;
 
 namespace osu.Game.Overlays.Mods
 {
@@ -620,6 +621,14 @@ namespace osu.Game.Overlays.Mods
                     hideOverlay(true);
                     return true;
 
+                case GlobalAction.SwitchSearchBarFocus:
+                    if (SearchTextBox.HasFocus)
+                        SearchTextBox.KillFocus();
+                    else
+                        SearchTextBox.TakeFocus();
+
+                    return true;
+
                 //This is handled locally here to prevent search box from coupling in DeselectAllModsButton
                 case GlobalAction.DeselectAllMods:
                 {
@@ -682,6 +691,18 @@ namespace osu.Game.Overlays.Mods
 
         public void OnReleased(KeyBindingReleaseEvent<PlatformAction> e)
         {
+        }
+
+        protected override bool OnKeyDown(KeyDownEvent e)
+        {
+            if (e.Repeat)
+                return false;
+
+            if (e.Key == Key.Tab)
+            {
+            }
+
+            return base.OnKeyDown(e);
         }
 
         #endregion
